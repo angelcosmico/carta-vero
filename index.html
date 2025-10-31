@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✨ ¡Una Carta para Vero! 💌</title>
+  <title>✨ ¡Una Carta para Vero! ✉️</title>
   <style>
     body {
       margin: 0;
@@ -15,6 +15,31 @@
       overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       perspective: 1200px;
+    }
+
+    .instruction {
+      position: absolute;
+      top: 8%;
+      text-align: center;
+      color: #004d40;
+      font-size: 1.3em;
+      background: rgba(255,255,255,0.8);
+      padding: 10px 20px;
+      border-radius: 20px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      animation: pulse 1.8s infinite ease-in-out;
+      transition: opacity 0.8s ease;
+      z-index: 5;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.8; }
+    }
+
+    .instruction.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .envelope-wrapper {
@@ -54,7 +79,6 @@
       backface-visibility: hidden;
     }
 
-    /* Parte inferior del sobre */
     .envelope-bottom {
       position: absolute;
       bottom: 0;
@@ -160,6 +184,10 @@
 
     /* Ajuste móvil */
     @media (max-width: 600px) {
+      .instruction {
+        font-size: 1.1em;
+        padding: 8px 16px;
+      }
       .envelope-wrapper {
         width: 95vw;
         max-width: 420px;
@@ -174,6 +202,8 @@
   </style>
 </head>
 <body>
+  <div class="instruction">✉️ Toca el sobre para abrir la carta ✉️</div>
+
   <div class="envelope-wrapper">
     <div class="envelope">
       <div class="envelope-top"></div>
@@ -182,7 +212,7 @@
         <div class="paper-content">
           <h1>✨ ¡Feliz Cumpleaños Vero! ⚖️🎨</h1>
           <p>
-            ¡Hola Vero! Hoy es un día para celebrar a una persona genuinamente admirable, y no hay mejor forma de hacerlo que con un detalle creado para ti.
+            Hola Vero, Hoy es un día para celebrar a una persona genuinamente admirable, y no hay mejor forma de hacerlo que con un detalle creado para ti.
           </p>
           <p>
             Es inspirador ver la seguridad y la alegría con la que afrontas cada desafío en la vida. Tienes una habilidad especial para ser decidida, neutral y analítica, cualidades que te llevarán muy lejos en tus metas.
@@ -204,10 +234,12 @@
   <script>
     const envelopeWrapper = document.querySelector('.envelope-wrapper');
     const envelope = document.querySelector('.envelope');
+    const instruction = document.querySelector('.instruction');
 
     // Abrir al tocar o hacer clic
     envelopeWrapper.addEventListener('click', () => {
       envelope.classList.toggle('open');
+      instruction.classList.add('hidden');
     });
 
     // Globos
@@ -233,5 +265,3 @@
   </script>
 </body>
 </html>
-
-
