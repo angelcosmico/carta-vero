@@ -19,14 +19,14 @@
 
     .envelope-wrapper {
       position: relative;
-      width: 90%;
-      max-width: 420px;
-      height: auto;
-      aspect-ratio: 1.6/1;
+      width: 90vw;
+      max-width: 500px;
+      aspect-ratio: 1.4/1;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 2;
+      cursor: pointer;
     }
 
     .envelope {
@@ -34,14 +34,10 @@
       width: 100%;
       height: 100%;
       background-color: #f7e1e6;
-      border-radius: 10px;
+      border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      transition: transform 1.2s ease-in-out;
       transform-style: preserve-3d;
-    }
-
-    .envelope.open {
-      transform: translateY(-40px) rotateX(10deg);
+      transition: transform 1s ease-in-out;
     }
 
     .envelope-top {
@@ -50,12 +46,28 @@
       left: 0;
       width: 100%;
       height: 50%;
-      background-color: #f7e1e6;
-      border-radius: 10px 10px 0 0;
+      background-color: #f4c2c2;
+      border-radius: 12px 12px 0 0;
       transform-origin: top center;
       transition: transform 1s ease-in-out;
       z-index: 3;
       backface-visibility: hidden;
+    }
+
+    /* Parte inferior del sobre */
+    .envelope-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background-color: #f7e1e6;
+      border-radius: 0 0 12px 12px;
+      z-index: 1;
+    }
+
+    .envelope.open {
+      transform: translateY(-40px) rotateX(10deg);
     }
 
     .envelope.open .envelope-top {
@@ -79,6 +91,7 @@
       padding: 20px;
       box-sizing: border-box;
       overflow-y: auto;
+      z-index: 2;
     }
 
     .envelope.open .paper {
@@ -148,14 +161,14 @@
     /* Ajuste móvil */
     @media (max-width: 600px) {
       .envelope-wrapper {
-        width: 95%;
-        max-width: 360px;
+        width: 95vw;
+        max-width: 420px;
       }
       h1 {
         font-size: 1.6em;
       }
       p {
-        font-size: 0.95em;
+        font-size: 1em;
       }
     }
   </style>
@@ -164,6 +177,7 @@
   <div class="envelope-wrapper">
     <div class="envelope">
       <div class="envelope-top"></div>
+      <div class="envelope-bottom"></div>
       <div class="paper">
         <div class="paper-content">
           <h1>✨ ¡Feliz Cumpleaños Vero! ⚖️🎨</h1>
@@ -180,7 +194,7 @@
             Espero que disfrutes tu día al máximo, rodeada del cariño de quienes te quieren. No tengo ninguna duda de que todos están orgullosos de la mujer que eres y de todo lo que has logrado.
           </p>
           <p class="closing-p">
-            ¡Que este nuevo año venga lleno de éxitos, mucha música y aún más momentos felices! 💖
+            ¡Que este nuevo año venga lleno de éxitos, mucha música y aún más momentos felices! <3
           </p>
         </div>
       </div>
@@ -188,11 +202,13 @@
   </div>
 
   <script>
+    const envelopeWrapper = document.querySelector('.envelope-wrapper');
     const envelope = document.querySelector('.envelope');
 
-    setTimeout(() => {
-      envelope.classList.add('open');
-    }, 800);
+    // Abrir al tocar o hacer clic
+    envelopeWrapper.addEventListener('click', () => {
+      envelope.classList.toggle('open');
+    });
 
     // Globos
     for (let i = 0; i < 10; i++) {
@@ -217,3 +233,5 @@
   </script>
 </body>
 </html>
+
+
